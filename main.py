@@ -57,8 +57,12 @@ async def say_hello(short_url: str):
     url_collection = db["urls"]
     # long_url = await get_long_url_from_json_file(short_url)
     doc_url = await url_collection.find_one({"short_url": short_url})
-    long_url = doc_url["long_url"]
-    if long_url:
-        return RedirectResponse(url=long_url, status_code=status.HTTP_302_FOUND)
+    if doc_url is not None:
+        doc_count = doc_url.get('count', 0)
+        long_url = doc_url["long_url"]
+        if long_url:
+            doc_count += 1
+            result = await url_collection.update_one({"_id": doc_url['_id']}, {"$set": {"count": doc_count}})
+            return RedirectResponse(url=long_url, status_code=status.HTTP_302_FOUND)
     else:
         "invalid short url"

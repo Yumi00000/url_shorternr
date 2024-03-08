@@ -6,7 +6,11 @@ services:
     ports:
       - 8000:8000
     environment:
+<<<<<<< HEAD
       MONGO_MOST: mongodb
+=======
+      MONGO_HOST: mongo
+>>>>>>> 9e3595f (added bot)
       MONGO_USERNAME: root
       MONGO_PASSWORD: example
 
@@ -26,10 +30,18 @@ services:
     image: mongo-express
     restart: always
     ports:
+<<<<<<< HEAD
       - 8081:8081
+=======
+      - 8080:8080
+>>>>>>> 9e3595f (added bot)
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_BASICAUTH_USERNAME: root
       ME_CONFIG_BASICAUTH_PASSWORD: example
+<<<<<<< HEAD
       ME_CONFIG_MONGODB_URL: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/
+=======
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+>>>>>>> 9e3595f (added bot)
